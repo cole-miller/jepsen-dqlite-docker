@@ -4,6 +4,8 @@ jobs:
   go:
     runs-on: ubuntu-22.04
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
       - name: sysctl
         run: |
           sudo sysctl -w kernel.core_pattern=core

@@ -97,7 +97,7 @@ jobs:
         nemesis: ${{ fromJSON(inputs.nemeses) }}
         disk: ${{ fromJSON(inputs.disk) }}
     runs-on: ubuntu-20.04
-    container: ghcr.io/cole-miller/jepsen-dqlite-docker:0.3.0
+    container: ghcr.io/cole-miller/jepsen-dqlite-docker:0.4.0
     timeout-minutes: 25
     steps:
     - name: Checkout code

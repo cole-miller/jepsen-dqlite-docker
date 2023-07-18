@@ -2,9 +2,14 @@ name: blah blah blah
 on: [push]
 jobs:
   go:
-    uses: ./.github/workflows/test-build-run.yml
-    with:
-      workloads: "['append']"
-      nemeses: "['none']"
-      disk: "['0']"
+    steps:
+      - name: sysctl
+        run: |
+          sudo sysctl -w kernel.core_pattern=core
+      - name: container
+        uses: ./.github/workflows/test-build-run.yml
+        with:
+          workloads: "['append']"
+          nemeses: "['none']"
+          disk: "['0']"
 

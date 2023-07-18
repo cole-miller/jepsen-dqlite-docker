@@ -96,10 +96,7 @@ jobs:
         workload: ${{ fromJSON(inputs.workloads) }}
         nemesis: ${{ fromJSON(inputs.nemeses) }}
         disk: ${{ fromJSON(inputs.disk) }}
-    runs-on: ubuntu-20.04
-    container:
-      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.4.0
-      options: '--sysctl kernel.core_pattern'
+    container: ghcr.io/cole-miller/jepsen-dqlite-docker:0.4.0
     timeout-minutes: 25
     steps:
     - name: Checkout code

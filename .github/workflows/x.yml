@@ -2,7 +2,7 @@ name: blah blah blah
 on: [push]
 jobs:
   go:
-    uses: .github/workflows/test-build-run-yml
+    uses: .github/workflows/test-build-run.yml
     with:
       workloads: ['append']
       nemeses: ['none']

@@ -2,6 +2,7 @@ name: blah blah blah
 on: [push]
 jobs:
   go:
+    runs-on: ubuntu-22.04
     steps:
       - name: sysctl
         run: |

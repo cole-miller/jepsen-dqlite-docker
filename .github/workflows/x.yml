@@ -6,9 +6,10 @@ jobs:
     container:
       image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.4.0
       options: --privileged
-    uses: ./.github/workflows/test-build-run.yml
-    with:
-      workloads: "['append']"
-      nemeses: "['none']"
-      disk: "['0']"
-
+    steps:
+      - name: jepsen
+        uses: ./.github/workflows/test-build-run.yml
+        with:
+          workloads: "['append']"
+          nemeses: "['none']"
+          disk: "['0']"

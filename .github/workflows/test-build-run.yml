@@ -96,9 +96,12 @@ jobs:
         workload: ${{ fromJSON(inputs.workloads) }}
         nemesis: ${{ fromJSON(inputs.nemeses) }}
         disk: ${{ fromJSON(inputs.disk) }}
-    container: ghcr.io/cole-miller/jepsen-dqlite-docker:0.4.0
     timeout-minutes: 25
     steps:
+    - name: sysctl
+      run: |
+        sudo sysctl -w kernel.core_pattern=core
+
     - name: Checkout code
       uses: actions/checkout@v3
       with:

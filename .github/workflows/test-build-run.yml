@@ -97,7 +97,7 @@ jobs:
         nemesis: ${{ fromJSON(inputs.nemeses) }}
         disk: ${{ fromJSON(inputs.disk) }}
     runs-on: ubuntu-20.04
-    container: ghcr.io/cole-miller/jepsen-dqlite-docker:0.2.0
+    container: ghcr.io/cole-miller/jepsen-dqlite-docker:0.3.0
     timeout-minutes: 25
     steps:
     - name: Checkout code
@@ -123,9 +123,6 @@ jobs:
         key: ${{ runner.os }}-clojure-${{ hashFiles('**/project.clj') }}
         restore-keys: |
           ${{ runner.os }}-clojure
-
-    - name: Install Go
-      uses: actions/setup-go@v3
 
     - name: Setup environment
       timeout-minutes: 15

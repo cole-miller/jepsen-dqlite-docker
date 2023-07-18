@@ -99,7 +99,7 @@ jobs:
     timeout-minutes: 25
     runs-on: ubuntu-22.04
     container:
-      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.4.0
+      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.5.0
       options: --privileged
     steps:
     - name: sysctl
@@ -177,10 +177,11 @@ jobs:
       env:
         LD_LIBRARY_PATH: "/usr/local/lib"
       timeout-minutes: 8
+
       run: |
-        go get golang.org/x/sync/semaphore
-        go get -tags libsqlite3 github.com/canonical/go-dqlite/app
-        go build -tags libsqlite3 -o resources/app resources/app.go
+        /usr/local/go/bin/go get golang.org/x/sync/semaphore
+        /usr/local/go/bin/go get -tags libsqlite3 github.com/canonical/go-dqlite/app
+        /usr/local/go/bin/go build -tags libsqlite3 -o resources/app resources/app.go
         sudo ufw disable
         sleep 0.200
         sudo systemctl stop ufw.service

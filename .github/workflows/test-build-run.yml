@@ -173,15 +173,30 @@ jobs:
         sudo make install
         sudo ldconfig
 
+    - name: 'Fake sed for Jepsen >:)'
+      run: |
+        cd /root
+        cat >./sed <<EOF
+          #!/bin/sh
+          if test $1 = -i; then
+            shift
+            /usr/bin/sed -ci $@
+          else
+            /usr/bin/sed $@
+          fi
+        EOF
+        cat ./sed
+        chmod +x ./sed
+
     - name: Test
       env:
         LD_LIBRARY_PATH: "/usr/local/lib"
+        PATH: /root/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/bin:/sbin:/bin
       timeout-minutes: 8
-
       run: |
-        /usr/local/go/bin/go get golang.org/x/sync/semaphore
-        /usr/local/go/bin/go get -tags libsqlite3 github.com/canonical/go-dqlite/app
-        /usr/local/go/bin/go build -tags libsqlite3 -o resources/app resources/app.go
+        go get golang.org/x/sync/semaphore
+        go get -tags libsqlite3 github.com/canonical/go-dqlite/app
+        go build -tags libsqlite3 -o resources/app resources/app.go
         sudo ./resources/network.sh setup 5
         if test ${{ matrix.workload }} = set; then echo 180 >time-limit; else echo 240 >time-limit; fi
         lein run test --no-ssh --binary $(pwd)/resources/app \

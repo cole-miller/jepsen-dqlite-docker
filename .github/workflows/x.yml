@@ -4,13 +4,11 @@ jobs:
   go:
     runs-on: ubuntu-22.04
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
       - name: sysctl
         run: |
           sudo sysctl -w kernel.core_pattern=core
       - name: container
-        uses: ./.github/workflows/test-build-run.yml
+        uses: cole-miller/jepsen-dqlite-docker/.github/workflows/test-build-run.yml@master
         with:
           workloads: "['append']"
           nemeses: "['none']"

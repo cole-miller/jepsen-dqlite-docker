@@ -123,11 +123,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-clojure
 
-    - name: Setup environment
-      timeout-minutes: 15
-      run: |
-        printf core | sudo tee /proc/sys/kernel/core_pattern
-
     - name: Install local Jepsen
       if: ${{ inputs.jepsen-repo && inputs.jepsen-branch }}
       run: |

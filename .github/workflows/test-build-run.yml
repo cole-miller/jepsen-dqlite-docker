@@ -99,7 +99,7 @@ jobs:
     timeout-minutes: 25
     runs-on: ubuntu-22.04
     container:
-      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.5.0
+      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.6.0
       options: --privileged
     steps:
     - name: sysctl

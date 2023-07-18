@@ -8,7 +8,7 @@ jobs:
       options: --privileged
     steps:
       - name: jepsen
-        uses: ./.github/workflows/test-build-run.yml
+        uses: cole-miller/jepsen-dqlite-docker/.github/workflows/test-build-run.yml@master
         with:
           workloads: "['append']"
           nemeses: "['none']"

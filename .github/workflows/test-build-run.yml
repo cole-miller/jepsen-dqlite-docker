@@ -99,7 +99,7 @@ jobs:
     timeout-minutes: 25
     runs-on: ubuntu-22.04
     container:
-      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.9.0
+      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.11.0
       options: --privileged
     steps:
     - name: sysctl
@@ -173,25 +173,10 @@ jobs:
         sudo make install
         sudo ldconfig
 
-    - name: 'Fake sed for Jepsen >:)'
-      run: |
-        cd /root
-        cat >./sed <<EOF
-          #!/bin/sh
-          if test $1 = -i; then
-            shift
-            /usr/bin/sed -ci $@
-          else
-            /usr/bin/sed $@
-          fi
-        EOF
-        cat ./sed
-        chmod +x ./sed
-
     - name: Test
       env:
         LD_LIBRARY_PATH: "/usr/local/lib"
-        PATH: /root/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/bin:/sbin:/bin
+        PATH: "/root/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/bin:/sbin:/bin"
       timeout-minutes: 8
       run: |
         go get golang.org/x/sync/semaphore

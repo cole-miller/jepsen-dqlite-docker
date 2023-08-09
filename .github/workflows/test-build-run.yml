@@ -180,7 +180,7 @@ jobs:
       timeout-minutes: 8
       run: |
         go get golang.org/x/sync/semaphore
-        go get -tags libsqlite3 github.com/canonical/go-dqlite/app
+        go get -tags libsqlite3 github.com/canonical/go-dqlite/app@master
         go build -tags libsqlite3 -o resources/app resources/app.go
         sudo ./resources/network.sh setup 5
         if test ${{ matrix.workload }} = set; then echo 180 >time-limit; else echo 240 >time-limit; fi

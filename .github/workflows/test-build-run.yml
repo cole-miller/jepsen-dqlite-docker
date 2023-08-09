@@ -99,7 +99,7 @@ jobs:
     timeout-minutes: 25
     runs-on: ubuntu-22.04
     container:
-      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.11.0
+      image: ghcr.io/cole-miller/jepsen-dqlite-docker:0.12.0
       options: --privileged
     steps:
     - name: sysctl
@@ -176,7 +176,7 @@ jobs:
     - name: Test
       env:
         LD_LIBRARY_PATH: "/usr/local/lib"
-        PATH: "/root/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/bin:/sbin:/bin"
+        PATH: "/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/bin:/sbin:/bin"
       timeout-minutes: 8
       run: |
         go get golang.org/x/sync/semaphore
@@ -184,6 +184,7 @@ jobs:
         go build -tags libsqlite3 -o resources/app resources/app.go
         sudo ./resources/network.sh setup 5
         if test ${{ matrix.workload }} = set; then echo 180 >time-limit; else echo 240 >time-limit; fi
+        which sed
         lein run test --no-ssh --binary $(pwd)/resources/app \
           --workload ${{ matrix.workload }} \
           --nemesis ${{ matrix.nemesis }} \

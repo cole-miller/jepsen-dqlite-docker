@@ -7,3 +7,5 @@ jobs:
       workloads: "['append']"
       nemeses: "['none']"
       disk: "['0']"
+      jepsen-repo: "https://github.com/cole-miller/jepsen"
+      jepsen-branch: "sed"
